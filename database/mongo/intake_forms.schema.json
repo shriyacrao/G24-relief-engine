@@ -1,0 +1,159 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "status",
+      "disaster_type",
+      "location",
+      "reporter",
+      "household",
+      "needs",
+      "created_at"
+    ],
+    "properties": {
+      "sos_id": {
+        "bsonType": [
+          "int",
+          "long",
+          "null"
+        ],
+        "description": "VICTIM_SOS.sos_id in MySQL (null while draft)"
+      },
+      "status": {
+        "enum": [
+          "draft",
+          "linked"
+        ]
+      },
+      "disaster_type": {
+        "enum": [
+          "flood",
+          "landslide",
+          "building_collapse",
+          "fire",
+          "cyclone",
+          "other"
+        ]
+      },
+      "location": {
+        "bsonType": "object",
+        "required": [
+          "type",
+          "coordinates"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "Point"
+            ]
+          },
+          "coordinates": {
+            "bsonType": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": [
+              {
+                "bsonType": [
+                  "double",
+                  "int"
+                ],
+                "minimum": -180,
+                "maximum": 180
+              },
+              {
+                "bsonType": [
+                  "double",
+                  "int"
+                ],
+                "minimum": -90,
+                "maximum": 90
+              }
+            ]
+          }
+        }
+      },
+      "reporter": {
+        "bsonType": "object",
+        "required": [
+          "user_id",
+          "name"
+        ],
+        "properties": {
+          "user_id": {
+            "bsonType": [
+              "int",
+              "long"
+            ]
+          },
+          "name": {
+            "bsonType": "string"
+          }
+        }
+      },
+      "household": {
+        "bsonType": "array",
+        "minItems": 1,
+        "maxItems": 200,
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "age": {
+              "bsonType": [
+                "int",
+                "long",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 120
+            },
+            "gender": {
+              "enum": [
+                "female",
+                "male",
+                "other",
+                "unspecified"
+              ]
+            },
+            "injuries": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            },
+            "medical_needs": {
+              "bsonType": "array",
+              "items": {
+                "bsonType": "string"
+              }
+            },
+            "is_pregnant": {
+              "bsonType": "bool"
+            },
+            "mobility": {
+              "enum": [
+                "ok",
+                "limited",
+                "immobile"
+              ]
+            }
+          }
+        }
+      },
+      "needs": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "string"
+        }
+      },
+      "details": {
+        "bsonType": "object"
+      },
+      "timeline": {
+        "bsonType": "array"
+      },
+      "created_at": {
+        "bsonType": "date"
+      }
+    }
+  }
+}
