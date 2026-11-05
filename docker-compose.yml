@@ -1,0 +1,37 @@
+# MongoDB + PostgreSQL/pgvector for local development.
+# (MySQL usually runs natively; an optional MySQL service is included - uncomment it if you prefer Docker.)
+#   docker compose up -d
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: relief-mongo
+    ports: ["27017:27017"]
+    volumes: [mongo_data:/data/db]
+    restart: unless-stopped
+
+  postgres:
+    image: pgvector/pgvector:pg16          # PostgreSQL 16 with the pgvector extension pre-installed
+    container_name: relief-pgvector
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}   # superuser; the app uses relief_vector_app
+    ports: ["5433:5432"]
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./database/vector/pgvector_setup.sql:/docker-entrypoint-initdb.d/01_pgvector_setup.sql:ro   # runs on first start
+    restart: unless-stopped
+
+  # mysql:
+  #   image: mysql:8.0
+  #   container_name: relief-mysql
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change-me}
+  #   ports: ["3306:3306"]
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
+  #     - ./database/sql:/docker-entrypoint-initdb.d:ro   # runs 01, 02, 03 on first start
+  #   restart: unless-stopped
+
+volumes:
+  mongo_data:
+  pg_data:
+  # mysql_data:

@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env*.local
+*.log
+models/
+.DS_Store
+next-env.d.ts
+*.tsbuildinfo
+
+# Temporary project reports
+docs/PROJECT_REPORT.md
+docs/PROJECT_REPORT.pdf
