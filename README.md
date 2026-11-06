@@ -15,7 +15,6 @@ ReliefOps lets a city disaster-response team **triage SOS reports, match victims
 | **MongoDB** | Victim intake forms (household, injuries, needs, disaster-specific fields) and the audit log | Each intake form has a different shape: a varying number of people, nested injury lists, and different fields for a flood than for a landslide. A document fits this naturally, and aggregation pipelines can summarise it. |
 | **PostgreSQL + pgvector** (vector DB) | Embeddings of SOS text and relief-item descriptions | Field reports are free text written under stress ("kid burning up"). Keyword search misses them, but cosine similarity on sentence embeddings finds them. pgvector keeps the vectors in ordinary SQL tables with an HNSW index, so similarity search, geo/time filters and fusion of several queries are each a single SQL function call. |
 
-![Architecture](docs/images/architecture.png)
 
 ---
 
@@ -162,14 +161,5 @@ This runs 22 integration tests covering auth, app-level and database-level RBAC,
 
 ---
 
-## Git workflow (individual contributions)
-Both members commit from their own GitHub accounts so the history shows who did what. One person creates the repository and adds the other as a collaborator. Each person then commits the folders they built; [docs/PROJECT_REPORT.md § 15](docs/PROJECT_REPORT.md#15-individual-contributions) has the split and a suggested commit order.
-```bash
-git init && git branch -M main
-git remote add origin https://github.com/<user>/relief-engine.git
-git add database/sql/01_ddl.sql && git commit -m "DDL: tables, keys, constraints, indexes"   # whoever wrote it
-git push -u origin main
-```
-Use feature branches (`feat/sql-triggers`, `feat/mongo-intake`, `feat/vector-search`, `feat/dispatch-ui` …) and pull requests for the rest.
-
-See **[docs/PROJECT_REPORT.md](docs/PROJECT_REPORT.md)** for the full documentation.
+## Documentation
+The full project report is in [`docs/G24_PES2UG24CS481_PES2UG24CS496.pdf`](docs/G24_PES2UG24CS481_PES2UG24CS496.pdf). The vector database design is described in [`database/vector/README.md`](database/vector/README.md).
