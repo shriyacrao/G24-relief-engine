@@ -61,8 +61,8 @@ relief-engine/
 │   │   ├── api.ts  session.ts  validation.ts
 │   ├── app/api/**/route.ts            # REST API (31 route handlers)
 │   └── app/(app)/**/page.tsx          # UI pages
-├── tests/integration.test.mjs         # 20 end-to-end test cases
-├── docs/PROJECT_REPORT.md             # full project documentation (+ screenshots, diagrams)
+├── tests/integration.test.mjs         # 22 end-to-end test cases
+├── docs/                              # full project documentation (+ screenshots, diagrams)
 ├── docker-compose.yml                 # MongoDB + PostgreSQL/pgvector (optional MySQL)
 └── .env.example
 ```
