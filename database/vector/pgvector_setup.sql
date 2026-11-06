@@ -181,7 +181,7 @@ $$;
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'relief_vector_app') THEN
-        CREATE ROLE relief_vector_app LOGIN PASSWORD 'Vector_Relief_2026';
+        CREATE ROLE relief_vector_app LOGIN PASSWORD 'CHANGE_ME_VECTOR';
     END IF;
 END $$;
 
